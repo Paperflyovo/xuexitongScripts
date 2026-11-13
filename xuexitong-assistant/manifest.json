@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "学习通课程助手",
+  "version": "0.3.0",
+  "description": "按顺序播放课程任务、切换章节，并使用自选云端模型辅助回答课内题目。",
+  "minimum_chrome_version": "102",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "optional_permissions": ["cookies"],
+  "host_permissions": ["https://*.chaoxing.com/*", "https://*.xuexitong.com/*"],
+  "optional_host_permissions": ["https://*/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_title": "学习通课程助手", "default_popup": "popup.html" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.chaoxing.com/mycourse/studentstudy*",
+        "https://*.chaoxing.com/mooc-ans/mycourse/studentstudy*",
+        "https://*.xuexitong.com/mycourse/studentstudy*",
+        "https://*.xuexitong.com/mooc-ans/mycourse/studentstudy*",
+        "https://*.chaoxing.com/mooc-ans/mooc2/work/*",
+        "https://*.xuexitong.com/mooc-ans/mooc2/work/*",
+        "https://*.chaoxing.com/exam-ans/mooc2/exam/preview*",
+        "https://*.xuexitong.com/exam-ans/mooc2/exam/preview*",
+        "https://*.chaoxing.com/exam-ans/exam/test/reVersionTestStartNew*",
+        "https://*.xuexitong.com/exam-ans/exam/test/reVersionTestStartNew*",
+        "https://*.chaoxing.com/exam-ans/exam/test/reVersionPaperMarkContentNew*",
+        "https://*.xuexitong.com/exam-ans/exam/test/reVersionPaperMarkContentNew*"
+      ],
+      "js": ["vendor/TyprMd5.js", "vendor/cx-glyphs.js", "vendor/html2canvas.min.js", "vendor/katex.min.js", "vendor/math-formula.js", "course-page.js", "course-font.js", "review-tools.js", "questions.js", "course-runner.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
